@@ -4,6 +4,8 @@ import Link from 'next/link';
 export default async function HomePage() {
   const images = await getImages();
 
+  console.log(images);
+
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
       {/* Header */}
