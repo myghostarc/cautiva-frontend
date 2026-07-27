@@ -3,6 +3,7 @@
 import { put, list } from '@vercel/blob';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const ADMIN_COOKIE = 'admin_session';
 
@@ -50,6 +51,8 @@ export async function uploadImage(formData: FormData) {
     await put(`images/${Date.now()}-${file.name}`, file, {
         access: 'public',
     });
+
+    revalidatePath('/');
 
     // Redirigimos para que se recargue la página y se vea la nueva imagen
     redirect('/admin?uploaded=1');
